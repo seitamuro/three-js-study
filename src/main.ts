@@ -3,6 +3,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import vertexShader from "./shader/vertexShader.vert";
 import fragmentShader from "./shader/fragmentShader.frag";
 import "./style.css";
+import { Box } from "./box";
 
 /**
  * Setup Scene , Camera and etc
@@ -43,25 +44,7 @@ scene.add(camera);
 /**
  * Geometry
  */
-const geometry = new THREE.PlaneGeometry(1, 1, 32, 32);
-const count = geometry.attributes.position.count;
-
-const aRandom = new Float32Array(count);
-for (let i = 0; i < count; i++) {
-  aRandom[i] = Math.random();
-}
-geometry.setAttribute("aRandom", new THREE.BufferAttribute(aRandom, 1));
-
-const material = new THREE.RawShaderMaterial({
-  vertexShader: vertexShader,
-  fragmentShader: fragmentShader,
-  transparent: true,
-  side: THREE.DoubleSide,
-  uniforms: { uTime: { value: 0.0 } },
-});
-
-const mesh = new THREE.Mesh(geometry, material);
-scene.add(mesh);
+new Box(scene);
 
 /**
  * Animation
@@ -70,8 +53,6 @@ const clock = new THREE.Clock();
 
 const animate = () => {
   const elapsedTime = clock.getElapsedTime();
-
-  material.uniforms.uTime.value = elapsedTime;
 
   controls.update();
   renderer.render(scene, camera);

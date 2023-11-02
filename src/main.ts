@@ -3,8 +3,9 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import vertexShader from "./shader/vertexShader.vert";
 import fragmentShader from "./shader/fragmentShader.frag";
 import "./style.css";
-import { Box } from "./box";
-import { Line } from "./line";
+import { Box } from "./meshes/box";
+import { Line } from "./meshes/line";
+import { TextMesh } from "./meshes/text";
 
 /**
  * Setup Scene , Camera and etc
@@ -47,6 +48,7 @@ scene.add(camera);
  */
 //new Box(scene);
 new Line(scene);
+new TextMesh(scene, "Hello World");
 
 /**
  * Animation

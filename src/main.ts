@@ -4,6 +4,7 @@ import vertexShader from "./shader/vertexShader.vert";
 import fragmentShader from "./shader/fragmentShader.frag";
 import "./style.css";
 import { Box } from "./box";
+import { Line } from "./line";
 
 /**
  * Setup Scene , Camera and etc
@@ -44,7 +45,8 @@ scene.add(camera);
 /**
  * Geometry
  */
-new Box(scene);
+//new Box(scene);
+new Line(scene);
 
 /**
  * Animation

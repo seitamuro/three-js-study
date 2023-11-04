@@ -12,9 +12,8 @@ export class TextMesh {
 
   constructor(scene: THREE.Scene, text: string) {
     this.text = text;
-    //this.createText();
     this.material = new THREE.MeshPhongMaterial({
-      color: 0x00ffff,
+      color: 0xffffff,
       flatShading: true,
     });
     this.loadFont();

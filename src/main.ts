@@ -43,6 +43,13 @@ window.addEventListener("resize", () => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 scene.add(camera);
+const pointLight = new THREE.PointLight(0xffffff, 4.5, 0, 0);
+pointLight.color.setRGB(1, 1, 1);
+pointLight.position.set(0, 100, 90);
+scene.add(pointLight);
+const dirLight = new THREE.DirectionalLight(0xffffff, 0.4);
+dirLight.position.set(0, 0, 1).normalize();
+scene.add(dirLight);
 
 /**
  * Geometry

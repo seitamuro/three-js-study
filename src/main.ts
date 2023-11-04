@@ -16,6 +16,7 @@ const sizes = {
 };
 const canvas = document.querySelector(".webgl") as HTMLCanvasElement;
 const scene = new THREE.Scene();
+scene.background = new THREE.Color("#666666");
 const camera = new THREE.PerspectiveCamera(
   75,
   sizes.width / sizes.height,
@@ -48,7 +49,7 @@ scene.add(camera);
  */
 //new Box(scene);
 new Line(scene);
-new TextMesh(scene, "Hello World");
+new TextMesh(scene, "Hello World!");
 
 /**
  * Animation

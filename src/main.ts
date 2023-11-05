@@ -60,7 +60,22 @@ new Line(scene);
 new TextMesh(scene, "Hello World!");
 (async () => {
   const monkey = await new Model("models/monkey.glb").waitForLoad();
+  monkey.children.forEach((child) => {
+    if (child instanceof THREE.Mesh) {
+      child.material = new THREE.MeshPhongMaterial({
+        color: 0x00ff00,
+        flatShading: true,
+      });
+    }
+  });
   scene.add(monkey);
+})();
+(async () => {
+  const metric_monkey = await new Model(
+    "models/metaric_monkey.glb"
+  ).waitForLoad();
+  metric_monkey.position.set(0.5, 0, 0);
+  scene.add(metric_monkey);
 })();
 
 /**

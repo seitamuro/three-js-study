@@ -20,11 +20,6 @@ export class Model {
         (gltf) => {
           this.geometry = gltf.scene;
           this.geometry.scale.set(0.1, 0.1, 0.1);
-          this.geometry.children.forEach((child) => {
-            if (child instanceof THREE.Mesh) {
-              child.material = this.material;
-            }
-          });
           resolve(this.geometry);
         },
         undefined,

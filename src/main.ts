@@ -6,6 +6,7 @@ import "./style.css";
 import { Box } from "./meshes/box";
 import { Line } from "./meshes/line";
 import { TextMesh } from "./meshes/text";
+import { Model } from "./meshes/model";
 
 /**
  * Setup Scene , Camera and etc
@@ -57,6 +58,10 @@ scene.add(dirLight);
 //new Box(scene);
 new Line(scene);
 new TextMesh(scene, "Hello World!");
+(async () => {
+  const monkey = await new Model("models/monkey.glb").waitForLoad();
+  scene.add(monkey);
+})();
 
 /**
  * Animation

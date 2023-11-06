@@ -97,7 +97,6 @@ let prev_time = 0;
 const animate = () => {
   const elapsedTime = clock.getElapsedTime();
   const delta = elapsedTime - prev_time;
-  console.log(elapsedTime, delta);
 
   controls.update();
   renderer.render(scene, camera);

@@ -1,12 +1,13 @@
 import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 export class Model {
-  geometry: THREE.Group<THREE.Object3DEventMap>;
-  material: THREE.MeshPhongMaterial;
-  scene: THREE.Scene;
-  mesh: THREE.Mesh;
+  private geometry: THREE.Group<THREE.Object3DEventMap>;
+  private material: THREE.MeshPhongMaterial;
+  private scene: THREE.Scene;
+  private mesh: THREE.Mesh;
   private _loaded: Promise<THREE.Group<THREE.Object3DEventMap>>;
+  gltf: GLTF;
 
   constructor(path: string) {
     const loader = new GLTFLoader();
@@ -18,7 +19,9 @@ export class Model {
       loader.load(
         path,
         (gltf) => {
+          this.gltf = gltf;
           this.geometry = gltf.scene;
+          this.gltf = gltf;
           this.geometry.scale.set(0.1, 0.1, 0.1);
           resolve(this.geometry);
         },

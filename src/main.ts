@@ -7,6 +7,7 @@ import { Box } from "./meshes/box";
 import { Line } from "./meshes/line";
 import { TextMesh } from "./meshes/text";
 import { Model } from "./meshes/model";
+import { PlayAnimation } from "./meshes/animation";
 
 /**
  * Setup Scene , Camera and etc
@@ -77,18 +78,34 @@ new TextMesh(scene, "Hello World!");
   metric_monkey.position.set(0.5, 0, 0);
   scene.add(metric_monkey);
 })();
+let animation_monkey: PlayAnimation;
+(async () => {
+  const model = new Model("models/animation_monkey.glb");
+  const mesh = await model.waitForLoad();
+  const monkey = model.gltf;
+  monkey.scene.position.set(1.0, 0, 0);
+  animation_monkey = new PlayAnimation(monkey);
+  scene.add(mesh);
+})();
 
 /**
  * Animation
  */
 const clock = new THREE.Clock();
 
+let prev_time = 0;
 const animate = () => {
   const elapsedTime = clock.getElapsedTime();
+  const delta = elapsedTime - prev_time;
+  console.log(elapsedTime, delta);
 
   controls.update();
   renderer.render(scene, camera);
   window.requestAnimationFrame(animate);
+  if (animation_monkey && animation_monkey.animate) {
+    animation_monkey.animate(delta);
+  }
+  prev_time = elapsedTime;
 };
 
 animate();

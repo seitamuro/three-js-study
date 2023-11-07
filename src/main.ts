@@ -8,6 +8,8 @@ import { Line } from "./meshes/line";
 import { TextMesh } from "./meshes/text";
 import { Model } from "./meshes/model";
 import { PlayAnimation } from "./meshes/animation";
+import { Sphere } from "./meshes/sphere";
+import * as CANNON from "cannon";
 
 /**
  * Setup Scene , Camera and etc
@@ -87,6 +89,9 @@ let animation_monkey: PlayAnimation;
   animation_monkey = new PlayAnimation(monkey);
   scene.add(mesh);
 })();
+const world = new CANNON.World();
+world.gravity.set(0, -1, -1);
+const sphere = new Sphere(world, scene);
 
 /**
  * Animation
@@ -98,12 +103,15 @@ const animate = () => {
   const elapsedTime = clock.getElapsedTime();
   const delta = elapsedTime - prev_time;
 
+  world.step(delta);
+
   controls.update();
   renderer.render(scene, camera);
   window.requestAnimationFrame(animate);
   if (animation_monkey && animation_monkey.animate) {
     animation_monkey.animate(delta);
   }
+  sphere.animate(delta);
   prev_time = elapsedTime;
 };
 

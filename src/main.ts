@@ -90,7 +90,7 @@ let animation_monkey: PlayAnimation;
   scene.add(mesh);
 })();
 const world = new CANNON.World();
-world.gravity.set(0, -1, -1);
+world.gravity.set(0, -1, 0);
 const sphere = new Sphere(world, scene);
 
 /**

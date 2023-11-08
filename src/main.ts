@@ -10,6 +10,7 @@ import { Model } from "./meshes/model";
 import { PlayAnimation } from "./meshes/animation";
 import { Sphere } from "./meshes/sphere";
 import * as CANNON from "cannon";
+import { BoxRigidBody } from "./meshes/cannon/box";
 
 /**
  * Setup Scene , Camera and etc
@@ -92,6 +93,12 @@ let animation_monkey: PlayAnimation;
 const world = new CANNON.World();
 world.gravity.set(0, -1, 0);
 const sphere = new Sphere(world, scene);
+const cubeMesh = new THREE.Mesh(
+  new THREE.BoxGeometry(1, 1, 1),
+  new THREE.MeshBasicMaterial({ color: 0x0000ff })
+);
+scene.add(cubeMesh);
+const cubeRigidBody = new BoxRigidBody(world, cubeMesh);
 
 /**
  * Animation
@@ -113,6 +120,7 @@ const animate = () => {
   }
   sphere.animate(delta);
   prev_time = elapsedTime;
+  cubeRigidBody.updateMesh();
 };
 
 animate();

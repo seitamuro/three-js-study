@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import * as CANNON from "cannon";
-import { toCANNONQuaternion, toTHREEQuaternion } from "../utils";
+import { toCANNONQuaternion, toTHREEQuaternion } from "./utils";
 
 export class Sphere {
   animate: (delta: number) => void;
